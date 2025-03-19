@@ -49,6 +49,5 @@ document.querySelectorAll('button').forEach(button => {
             entradaAtual = '';
             atualizarTela();
         }
-        // Adicione mais lógica para outros botões conforme necessário
     });
 });
