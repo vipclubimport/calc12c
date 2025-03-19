@@ -1,103 +1,383 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora Financeira</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Calculadora Financeira HP-12C</title>
+    <style>
+        .calculator {
+            width: 500px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .display {
+            height: 40px;
+            background-color: #d0d0d0;
+            border: 1px solid #000;
+            margin-bottom: 10px;
+            text-align: right;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 20px;
+            color: #000;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+        }
+        button {
+            padding: 15px;
+            font-size: 16px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #777;
+        }
+        .orange {
+            background-color: #f28c38;
+        }
+        .blue {
+            background-color: #4a90e2;
+        }
+        .black {
+            background-color: #333;
+        }
+    </style>
 </head>
 <body>
-    <div class="calculadora">
-        <div class="topo">
-            <div class="tela">0</div>
-        </div>
-        <div class="teclado">
-            <!-- Linha 1 -->
-            <button class="laranja">AMORT</button>
-            <button class="azul">INT</button>
-            <button class="azul">NPV</button>
-            <button class="azul">RND</button>
-            <!-- Linha 2 -->
-            <button class="azul">IRR</button>
-            <button class="azul">CHS</button>
-            <button class="azul">n</button>
-            <button class="azul">i</button>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <!-- Linha 1: Funções financeiras -->
+            <button data-func="n">n</button>
+            <button data-func="i">i</button>
+            <button data-func="pv">PV</button>
+            <button data-func="pmt">PMT</button>
+            <button data-func="fv">FV</button>
+            <!-- Linha 2: Números e operações básicas -->
+            <button data-func="7">7</button>
+            <button data-func="8">8</button>
+            <button data-func="9">9</button>
+            <button data-func="divide">÷</button>
+            <button data-func="chs">CHS</button>
             <!-- Linha 3 -->
-            <button class="azul">PV</button>
-            <button class="azul">PMT</button>
-            <button class="azul">FV</button>
-            <button class="branco">7</button>
+            <button data-func="4">4</button>
+            <button data-func="5">5</button>
+            <button data-func="6">6</button>
+            <button data-func="multiply">×</button>
+            <button data-func="clear">CLX</button>
             <!-- Linha 4 -->
-            <button class="branco">8</button>
-            <button class="branco">9</button>
-            <button class="branco">÷</button>
-            <button class="azul">12x</button>
+            <button data-func="1">1</button>
+            <button data-func="2">2</button>
+            <button data-func="3">3</button>
+            <button data-func="subtract">−</button>
+            <button data-func="enter">ENTER</button>
             <!-- Linha 5 -->
-            <button class="azul">12÷</button>
-            <button class="azul">CFo</button>
-            <button class="azul">CFj</button>
-            <button class="azul">Nj</button>
-            <!-- Linha 6 -->
-            <button class="azul">BEG</button>
-            <button class="azul">END</button>
-            <button class="azul">MEM</button>
-            <button class="branco">×</button>
-            <!-- Linha 7 -->
-            <button class="azul">PRICE</button>
-            <button class="azul">BOND</button>
-            <button class="azul">YTM</button>
-            <button class="azul">SL</button>
-            <!-- Linha 8 -->
-            <button class="azul">SOYD</button>
-            <button class="azul">DB</button>
-            <button class="branco">4</button>
-            <button class="branco">5</button>
-            <!-- Linha 9 -->
-            <button class="branco">6</button>
-            <button class="branco">−</button>
-            <button class="azul">Y^x</button>
-            <button class="azul">1/x</button>
-            <!-- Linha 10 -->
-            <button class="azul">%T</button>
-            <button class="azul">Δ%</button>
-            <button class="azul">%</button>
-            <button class="azul">EEX</button>
-            <!-- Continuação -->
-            <button class="branco">1</button>
-            <button class="branco">2</button>
-            <button class="branco">3</button>
-            <button class="branco">+</button>
-            <button class="azul">P/R</button>
-            <button class="azul">Σ+</button>
-            <button class="azul">PRGM</button>
-            <button class="azul">FIN</button>
-            <button class="azul">REG</button>
-            <button class="azul">PREFIX</button>
-            <button class="branco">0</button>
-            <button class="branco">.</button>
-            <button class="branco">Σ−</button>
-            <button class="branco">+</button>
-            <button class="azul">R/S</button>
-            <button class="azul">SST</button>
-            <button class="azul">GTO</button>
-            <button class="enter azul">ENTER</button>
-            <button class="azul">x≷y</button>
-            <button class="azul">CLX</button>
-            <button class="branco">x²</button>
-            <button class="branco">y√x</button>
-            <button class="branco">1/n</button>
-            <button class="branco">−</button>
-            <button class="laranja">ON</button>
-            <button class="laranja">f</button>
-            <button class="azul">g</button>
-            <button class="azul">STO</button>
-            <button class="azul">RCL</button>
-            <button class="azul">LSTx</button>
-            <button class="branco">s</button>
-            <button class="branco">Σ+</button>
-            <button class="branco">+</button>
+            <button data-func="0">0</button>
+            <button data-func="dot">.</button>
+            <button data-func="add">+</button>
+            <button data-func="f" class="orange">f</button>
+            <button data-func="g" class="blue">g</button>
+            <!-- Linha 6: Memória e fluxo de caixa -->
+            <button data-func="sto" class="orange">STO</button>
+            <button data-func="rcl" class="orange">RCL</button>
+            <button data-func="cf0">CF0</button>
+            <button data-func="cfj">CFj</button>
+            <button data-func="nj">Nj</button>
+            <!-- Linha 7: Fluxo de caixa e depreciação -->
+            <button data-func="npv">NPV</button>
+            <button data-func="irr">IRR</button>
+            <button data-func="sl" class="blue">SL</button>
+            <button data-func="soyd" class="blue">SOYD</button>
+            <button data-func="db" class="blue">DB</button>
+            <!-- Linha 8: Funções matemáticas -->
+            <button data-func="recip" class="orange">1/x</button>
+            <button data-func="sqrt" class="orange">√x</button>
+            <button data-func="square" class="orange">x²</button>
+            <button data-func="ln" class="orange">LN</button>
+            <button data-func="exp" class="orange">e^x</button>
+            <!-- Linha 9: Porcentagem e estatísticas -->
+            <button data-func="percent" class="blue">%</button>
+            <button data-func="delta_percent" class="blue">Δ%</button>
+            <button data-func="sigma_plus" class="blue">Σ+</button>
+            <button data-func="sigma_minus" class="blue">Σ−</button>
+            <button data-func="mean" class="blue">x̄</button>
+            <!-- Linha 10: Outras funções -->
+            <button data-func="eex">EEX</button>
+            <button data-func="r_down">R↓</button>
+            <button data-func="x_y">x⇔y</button>
+            <button data-func="lst_x">LST x</button>
+            <button data-func="begin">BEGIN</button>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/financejs@4.1.0/finance.min.js"></script>
+    <script>
+        const Finance = window.Finance;
+        const calc = new Finance();
+        const display = document.getElementById('display');
+
+        // Estado da calculadora
+        let stack = [];
+        let currentInput = '';
+        let mode = 'normal'; // normal, f, g
+        let lastX = 0; // Para LST x
+        let registers = {
+            n: 0, i: 0, pv: 0, pmt: 0, fv: 0, // TVM
+            cf: [], nj: [], // Fluxo de caixa
+            memory: Array(10).fill(0), // Registradores de memória 0-9
+            stats: { sumX: 0, sumY: 0, sumXY: 0, sumX2: 0, sumY2: 0, n: 0 }, // Estatísticas
+            begin: false // Modo BEGIN ou END
+        };
+
+        // Atualiza o display
+        function updateDisplay(value) {
+            display.textContent = Number.isNaN(value) || !Number.isFinite(value) ? 'Erro' : value;
+        }
+
+        // Empilha valor atual
+        function pushToStack() {
+            if (currentInput !== '') {
+                stack.push(parseFloat(currentInput));
+                currentInput = '';
+                updateDisplay(stack[stack.length - 1]);
+            }
+        }
+
+        // Adiciona dígito ao input
+        function appendNumber(digit) {
+            currentInput = currentInput === '0' ? digit : currentInput + digit;
+            updateDisplay(currentInput);
+        }
+
+        // Limpa o valor atual (CLX)
+        function clearX() {
+            currentInput = '0';
+            if (stack.length > 0) stack.pop();
+            updateDisplay(stack.length > 0 ? stack[stack.length - 1] : '0');
+        }
+
+        // Altera o sinal
+        function changeSign() {
+            if (currentInput !== '') {
+                currentInput = (parseFloat(currentInput) * -1).toString();
+                updateDisplay(currentInput);
+            } else if (stack.length > 0) {
+                stack[stack.length - 1] *= -1;
+                updateDisplay(stack[stack.length - 1]);
+            }
+        }
+
+        // Operações aritméticas
+        function performOperation(op) {
+            if (stack.length < 2) return;
+            const b = stack.pop();
+            const a = stack.pop();
+            lastX = b;
+            let result;
+            switch (op) {
+                case 'add': result = a + b; break;
+                case 'subtract': result = a - b; break;
+                case 'multiply': result = a * b; break;
+                case 'divide': result = a / b; break;
+            }
+            stack.push(result);
+            updateDisplay(result);
+        }
+
+        // Funções financeiras TVM
+        function handleTVM(func) {
+            if (currentInput !== '') {
+                registers[func] = parseFloat(currentInput);
+                pushToStack();
+            } else {
+                try {
+                    let result;
+                    const { n, i, pv, pmt, fv, begin } = registers;
+                    const rate = i / 100;
+                    switch (func) {
+                        case 'pv':
+                            result = calc.PV(rate, n, pmt, fv, begin ? 1 : 0);
+                            break;
+                        case 'fv':
+                            result = calc.FV(rate, n, pmt, pv, begin ? 1 : 0);
+                            break;
+                        case 'pmt':
+                            result = calc.PMT(rate, n, pv, fv, begin ? 1 : 0);
+                            break;
+                        default:
+                            return;
+                    }
+                    registers[func] = result;
+                    stack.push(result);
+                    updateDisplay(result);
+                } catch (e) {
+                    updateDisplay('Erro');
+                }
+            }
+        }
+
+        // Funções de fluxo de caixa
+        function handleCashFlow(func) {
+            if (func === 'cf0') {
+                registers.cf = [parseFloat(currentInput)];
+                pushToStack();
+            } else if (func === 'cfj') {
+                registers.cf.push(parseFloat(currentInput));
+                pushToStack();
+            } else if (func === 'nj') {
+                registers.nj.push(parseFloat(currentInput));
+                pushToStack();
+            } else if (func === 'npv') {
+                const rate = stack.pop();
+                const npv = calc.NPV(rate / 100, registers.cf);
+                stack.push(npv);
+                updateDisplay(npv);
+            } else if (func === 'irr') {
+                const irr = calc.IRR(registers.cf);
+                stack.push(irr);
+                updateDisplay(irr);
+            }
+        }
+
+        // Funções matemáticas
+        function handleMath(func) {
+            if (stack.length < 1) return;
+            const x = stack.pop();
+            lastX = x;
+            let result;
+            switch (func) {
+                case 'recip': result = 1 / x; break;
+                case 'sqrt': result = Math.sqrt(x); break;
+                case 'square': result = x * x; break;
+                case 'ln': result = Math.log(x); break;
+                case 'exp': result = Math.exp(x); break;
+                case 'percent':
+                    if (stack.length > 0) result = stack[stack.length - 1] * x / 100;
+                    break;
+            }
+            if (result !== undefined) {
+                stack.push(result);
+                updateDisplay(result);
+            }
+        }
+
+        // Funções de memória
+        function handleMemory(func) {
+            if (currentInput !== '' && func === 'sto') {
+                registers.memory[0] = parseFloat(currentInput); // Simplificado para reg 0
+                pushToStack();
+            } else if (func === 'rcl') {
+                stack.push(registers.memory[0]);
+                updateDisplay(registers.memory[0]);
+            }
+        }
+
+        // Funções de pilha
+        function handleStack(func) {
+            if (func === 'r_down' && stack.length > 1) {
+                stack.unshift(stack.pop());
+                updateDisplay(stack[stack.length - 1]);
+            } else if (func === 'x_y' && stack.length > 1) {
+                const y = stack.pop();
+                const x = stack.pop();
+                stack.push(y);
+                stack.push(x);
+                updateDisplay(stack[stack.length - 1]);
+            } else if (func === 'lst_x') {
+                stack.push(lastX);
+                updateDisplay(lastX);
+            }
+        }
+
+        // Manipulação de eventos dos botões
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', () => {
+                const func = button.getAttribute('data-func');
+
+                if (mode === 'f') {
+                    mode = 'normal';
+                    switch (func) {
+                        case 'recip': handleMath('recip'); break;
+                        case 'sqrt': handleMath('sqrt'); break;
+                        case 'square': handleMath('square'); break;
+                        case 'ln': handleMath('ln'); break;
+                        case 'exp': handleMath('exp'); break;
+                        case 'sto': handleMemory('sto'); break;
+                        case 'rcl': handleMemory('rcl'); break;
+                    }
+                } else if (mode === 'g') {
+                    mode = 'normal';
+                    switch (func) {
+                        case 'percent': handleMath('percent'); break;
+                        case 'sigma_plus':
+                            if (stack.length >= 1) {
+                                const x = stack.pop();
+                                registers.stats.sumX += x;
+                                registers.stats.sumX2 += x * x;
+                                registers.stats.n += 1;
+                                updateDisplay(registers.stats.n);
+                            }
+                            break;
+                        case 'mean':
+                            if (registers.stats.n > 0) {
+                                const mean = registers.stats.sumX / registers.stats.n;
+                                stack.push(mean);
+                                updateDisplay(mean);
+                            }
+                            break;
+                    }
+                } else {
+                    switch (func) {
+                        case '0': case '1': case '2': case '3': case '4':
+                        case '5': case '6': case '7': case '8': case '9':
+                            appendNumber(func);
+                            break;
+                        case 'dot':
+                            if (!currentInput.includes('.')) appendNumber('.');
+                            break;
+                        case 'enter':
+                            pushToStack();
+                            break;
+                        case 'clear':
+                            clearX();
+                            break;
+                        case 'chs':
+                            changeSign();
+                            break;
+                        case 'add': case 'subtract': case 'multiply': case 'divide':
+                            performOperation(func);
+                            break;
+                        case 'n': case 'i': case 'pv': case 'pmt': case 'fv':
+                            handleTVM(func);
+                            break;
+                        case 'cf0': case 'cfj': case 'nj': case 'npv': case 'irr':
+                            handleCashFlow(func);
+                            break;
+                        case 'f':
+                            mode = 'f';
+                            break;
+                        case 'g':
+                            mode = 'g';
+                            break;
+                        case 'r_down': case 'x_y': case 'lst_x':
+                            handleStack(func);
+                            break;
+                        case 'begin':
+                            registers.begin = !registers.begin;
+                            updateDisplay(registers.begin ? 'BEGIN' : 'END');
+                            break;
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
